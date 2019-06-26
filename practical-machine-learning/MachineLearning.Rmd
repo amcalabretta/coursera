@@ -1,0 +1,48 @@
+---
+title: "MachineLearning"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Synopsis
+
+The aim of this essay is to apply various machine learning techniques to predict the outcome of particular exercises, more in  detail we will use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants; for further details, see [1].
+
+## Data Analisys and preparation
+First of all, we start by loading the libraries we will use for our analisys:
+```{r packages}
+library(caret)
+```
+
+We can now dowload the datasets provided and load them in two dataframe (train/test):
+
+```{r download}
+trainDf <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"),header=TRUE)
+testDf <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"),header=TRUE)
+```
+
+## Data Cleansing
+
+
+## References
+[1] http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har
+
+
+
+R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure}
+plot(pressure)
+```
+
