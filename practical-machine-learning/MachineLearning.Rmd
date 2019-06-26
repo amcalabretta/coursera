@@ -13,8 +13,14 @@ The aim of this essay is to apply various machine learning techniques to predict
 
 ## Data Analisys and preparation
 First of all, we start by loading the libraries we will use for our analisys:
-```{r packages}
+```{r packages, echo = TRUE,warning=FALSE}
 library(caret)
+library(knitr)
+library(kableExtra)
+library(plyr)
+library(ggplot2)
+library(gridExtra)
+library(grid)
 ```
 
 We can now dowload the datasets provided and load them in two dataframe (train/test):
@@ -24,7 +30,58 @@ trainDf <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml
 testDf <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"),header=TRUE)
 ```
 
-## Data Cleansing
+A quick glance to the columns gives:
+
+```{r download}
+names(trainDf)
+```
+
+Gives quite some column (160) whilst the number of rows can be easily found: 
+
+```{r nas}
+nrow(trainDf)
+```
+
+in the next paragraph we will have a look to the data quality:
+
+### Data Cleansing
+We can generate in a simple way to 
+
+```{r nas}
+sapply( trainDf, function(x) sum(is.na(x)))%>%
+  kable(col.names = c("Number of NAs"), caption="Number of NAs per column") %>%
+  kable_styling()
+```
+
+We can see that all the columns having NAs have exactly 20 of them, being 20 the number of rows of the dataset, we  can definitely remove those columns from both train and test datasets:
+
+```{r remove_nas}
+indexesToRemove <- which(colSums(is.na(trainDf))==20) 
+trainDf <- trainDf[,-indexesToRemove]
+testDf <- testDf[,-indexesToRemove]
+```
+
+The number of columns is now:
+
+```{r recalculate}
+ncol(trainDf)
+```
+
+We reduced the number of columns to 60.
+
+##Machine Learning - based predictions.
+
+In this paragraph we will apply three techniques:
+
+
+###Decision Tree
+
+
+
+###Part 2
+
+###Part 3
+
 
 
 ## References
