@@ -45,7 +45,7 @@ nrow(trainDf)
 in the next paragraph we will have a look to the data quality:
 
 ### Data Cleansing
-We can generate in a simple way to 
+We can generate an outline of the NAs in a simple way:
 
 ```{r nas}
 sapply( trainDf, function(x) sum(is.na(x)))%>%
@@ -87,19 +87,4 @@ In this paragraph we will apply three techniques:
 ## References
 [1] http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har
 
-
-
-R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure}
-plot(pressure)
-```
 
