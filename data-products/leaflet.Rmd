@@ -1,0 +1,27 @@
+---
+title: "Leaflet"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r load  echo=FALSE}
+library(leaflet)
+```
+
+
+```{r map}
+
+msIcon <- makeIcon(
+  iconUrl = "https://en.wikipedia.org/wiki/Microsoft#/media/File:Microsoft_logo_(2012).svg",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94
+)
+
+myMap<- leaflet() %>% addTiles() %>% addMarkers(lat=47.3831,lng=237.93,popup="Microsoft",icon=msIcon)
+myMap
+```
+
