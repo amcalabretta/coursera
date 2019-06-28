@@ -497,16 +497,18 @@ testDf &lt;- read.csv(url(&quot;https://d396qusza40orc.cloudfront.net/predmachle
 <p>We can generate an outline of the NAs in a simple way:</p>
 <pre class="r"><code>sapply( trainDf, function(x) sum(is.na(x)))%&gt;%
   kable(col.names = c(&quot;Number of NAs&quot;), caption=&quot;Number of NAs per column&quot;) %&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;, &quot;condensed&quot;,fixed_thead = T)) %&gt;%
+  scroll_box(width = &quot;500px&quot;, height = &quot;500px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:500px; ">
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <caption>
 Number of NAs per column
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Number of NAs
 </th>
 </tr>
@@ -1794,6 +1796,7 @@ problem_id
 </tr>
 </tbody>
 </table>
+</div>
 <p>We can see that all the columns having NAs have exactly 20 of them, being 20 the number of rows of the dataset, we can definitely remove those columns from both train and test datasets:</p>
 <pre class="r"><code>indexesToRemove &lt;- which(colSums(is.na(trainDf))==20) 
 trainDf &lt;- trainDf[,-indexesToRemove]

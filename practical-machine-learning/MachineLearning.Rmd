@@ -21,42 +21,43 @@ library(plyr)
 library(ggplot2)
 library(gridExtra)
 library(grid)
+library(rpart)
+library(rpart.plot)
+library(rattle)
 ```
 
 We can now dowload the datasets provided and load them in two dataframe (train/test):
 
 ```{r download}
-trainDf <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"),header=TRUE)
+trainDf <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"),header=TRUE)
 testDf <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"),header=TRUE)
 ```
 
-A quick glance to the columns gives:
+A quick glance to the train/test dataset gives:
 
-```{r names}
-names(trainDf)
+```{r dim1}
+dim(trainDf)
+```
+```{r dim1}
+dim(testDf)
 ```
 
-Gives quite some column (160) whilst the number of rows can be easily found: 
-
-```{r nas}
-nrow(trainDf)
-```
-
-in the next paragraph we will have a look to the data quality:
+We can see that the train dataset has 19622 rows and 160 features, same number of features (as expected for the test dataset) and 20 rows; in the next paragraph we will have a look to the data quality:
 
 ### Data Cleansing
 We can generate an outline of the NAs in a simple way:
 
 ```{r nas2}
-sapply( trainDf, function(x) sum(is.na(x)))%>%
+sapply( trainDf, function(x) sum(is.na(x))) %>%
   kable(col.names = c("Number of NAs"), caption="Number of NAs per column") %>%
-  kable_styling()
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed",fixed_thead = T)) %>%
+  scroll_box(width = "500px", height = "500px")
 ```
 
-We can see that all the columns having NAs have exactly 20 of them, being 20 the number of rows of the dataset, we  can definitely remove those columns from both train and test datasets:
+We can see that all the columns having NAs have a considerable amount of NAs (19216) covering more than  97% of the rows, we then can definitely remove those columns from both train and test datasets:
 
 ```{r remove_nas}
-indexesToRemove <- which(colSums(is.na(trainDf))==20) 
+indexesToRemove <- which(colSums(is.na(trainDf))==19216) 
 trainDf <- trainDf[,-indexesToRemove]
 testDf <- testDf[,-indexesToRemove]
 ```
@@ -67,20 +68,25 @@ The number of columns is now:
 ncol(trainDf)
 ```
 
-We reduced the number of columns to 60.
+We reduced the number of columns to 93 (from 160).
 
 ##Machine Learning - based predictions.
+chr
+In this paragraph we will apply three techniques:Classification Trees, Random Forests and Generalized Boosted Model.
 
-In this paragraph we will apply three techniques:
+###Classification Trees
+
+```{r recalculate}
+set.seed(78282)
+classificationTree <- rpart(classe ~ ., data=trainDf, method="class")
+fancyRpartPlot(classificationTree)
+```
 
 
-###Decision Tree
 
+###Random Forests
 
-
-###Part 2
-
-###Part 3
+###Generalized Boosted Model
 
 
 
