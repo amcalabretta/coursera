@@ -12,16 +12,28 @@ knitr::opts_chunk$set(echo = TRUE)
 library(leaflet)
 ```
 
+```{r create_df  echo=FALSE}
+Company <- c('Microsoft','Apple','Amazon','Alphabet','Berkshire Hathaway','Facebook','Johnson & Johnson','Exxon Mobil')
+MarketCap <- c(904.86, 895.67, 874.71,818.16,493.75,475.73,372.23,342.17)
+lat <- c(47.3831, 37.33, 47.61,37.422,41.25,37.45,40.486, 32.49)
+lng <- c(237.93, 238, 237.67,237.916,264,237.82,74.44, 96.57)
+df <- data.frame(Company, MarketCap,lat,lng)
+```
+
 
 ```{r map}
+map <-  df %>%
+  leaflet()  %>%
+  addTiles()  %>%
+  addCircles(weight = 1, radius = df$MarketCap)
+  addCircleMarkers(df$lng, df$lat, popup=df$Company)
+map
+```
 
-msIcon <- makeIcon(
-  iconUrl = "https://en.wikipedia.org/wiki/Microsoft#/media/File:Microsoft_logo_(2012).svg",
-  iconWidth = 38, iconHeight = 95,
-  iconAnchorX = 22, iconAnchorY = 94
-)
 
-myMap<- leaflet() %>% addTiles() %>% addMarkers(lat=47.3831,lng=237.93,popup="Microsoft",icon=msIcon)
-myMap
+```{r map}
+map <- leaflet(df) %>% addCircles(~Longitude, ~Latitude, popup=df$Company, weight=3, radius=40, 
+                 color="#ffa500", stroke = TRUE, fillOpacity = 0.8)
+
 ```
 
