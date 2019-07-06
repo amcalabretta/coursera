@@ -1,0 +1,38 @@
+---
+title: "Plotly"
+author: "A.M. Calabretta"
+date: "July 6, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Sinopsis
+This essay focuses on using plotly, and using it on the mtcars dataset, let's start with loading the mtcars dataset.
+
+```{r load_libs, echo=FALSE, message=FALSE}
+library(plotly)
+data(mtcars)
+
+```
+
+## Plots
+Now we can go for the plots:
+### Scatter Plots
+
+Basic scatter plot:
+```{r basic_scatterplot}
+plot_ly(mtcars, x = ~mpg, y = ~hp, mode = 'markers', type = "scatter")
+```
+
+Scatter plot with different color:
+```{r basic_scatterplot}
+plot_ly(mtcars, x = ~mpg, y = ~hp, mode = 'markers', type = "scatter",color = ~cyl)
+```
+
+
+
+
+
