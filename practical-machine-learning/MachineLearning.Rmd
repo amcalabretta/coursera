@@ -71,7 +71,6 @@ ncol(trainDf)
 We reduced the number of columns to 93 (from 160).
 
 ##Machine Learning - based predictions.
-chr
 In this paragraph we will apply three techniques:Classification Trees, Random Forests and Generalized Boosted Model.
 
 ###Classification Trees
