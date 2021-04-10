@@ -1,5 +1,5 @@
 ---
-title: "MachineLearning"
+title: "Practical Machine Learning - Course Project"
 output: html_document
 ---
 
@@ -142,27 +142,95 @@ ggcorrplot(trainCorrelationDf, hc.order = TRUE,
            ggtheme=theme_bw)
 ```
 
-We can see from the plot above (all tho not clearly visible due to the number of variables) that some of the variables have some sort of correlation, we proceed now in
+We can see from the plot above (all tho not clearly visible due to the number of variables) that some of the variables have some sort of correlation, we proceed now in removing the variables having high correlation (we arbitrarily set the value to be 90%) and check the number of columns:
 
 
-##Machine Learning - based predictions.
-In this paragraph we will apply three techniques:Classification Trees, Random Forests and Generalized Boosted Model.
-
-###Classification Trees
-
-```{r recalculate}
-set.seed(78282)
-#classificationTree <- rpart(classe ~ ., data=trainDf, method="class")
-#fancyRpartPlot(classificationTree)
+```{r train correlation remove}
+variablesToRemove = findCorrelation(trainCorrelationDf, cutoff=0.9)
+trainDf = trainDf[,-c(variablesToRemove)]
+testDf = testDf[,-c(variablesToRemove)]
+ncol(trainDf)
 ```
 
+We finally reduced the number of columns to 46 thus 45 variables as the last one (classe) is the one we want to predict.
 
 
-###Random Forests
+## Machine Learning - based predictions.
+In this paragraph we will apply three techniques:Classification Trees, Random Forests and Generalized Boosted Model. First of all, we will have to partition our train dataset into a further training set and another test set, to avoid confusion, we will create two new variables:
 
-###Generalized Boosted Model
+```{r train split}
+set.seed(5382)
+inTrain <- createDataPartition(y=trainDf$classe, p=0.7, list=F)
+trainingSet <- trainDf[inTrain, ]
+validationSet <- trainDf[-inTrain, ]
+```
+
+We will use the variables *trainingSet* and *validatonSet* in the reminder of our analysis, furthermore, we will use the following control to tune cross-validation:
+
+```{r train set cross validation}
+fitControl <- trainControl(method="cv", number=3, verboseIter=F)
+
+```
+
+### Models' Training
+In this paragraph we will train the chosen models and we will store their performances in one common variable for convenience; We start with Decision Trees: 
+
+```{r train decision trees}
+fit.decisionTree <- train(classe ~ ., data=trainingSet, method="rpart", trControl=fitControl)
+```
+
+Then we proceed with ramdom forest:
+
+```{r train random forest}
+fit.rf <- train(classe~., data=trainingSet, method="rf", trControl=fitControl)
+```
+
+And finally with theGeneralized Boosted Model:
+
+```{r train gbm}
+fit.gbm <- train(classe~., data = trainingSet, method = "gbm", trControl = fitControl,verbose = FALSE)
+```
+
+Time to check the performance of each of them:
+
+```{r performance decision tree}
+decisionTreePredictions <- predict(fit.decisionTree, newdata=validationSet)
+confusionMatrix(validationSet$classe, decisionTreePredictions)
+```
+
+Decision Tree seems to have an accuracy of 49%.
+
+```{r performance random forest}
+randomForestPrediction <- predict(fit.rf, newdata=validationSet)
+confusionMatrix(validationSet$classe, randomForestPrediction)
+```
+
+The random forest appraoch yeleded a 99.47% accuracy.
+
+```{r performance gbm}
+gbmPredictions <- predict(fit.gbm, newdata=validationSet)
+confusionMatrix(validationSet$classe, gbmPredictions)
+```
+
+The last approach (GBM) reached a 96.3 % accuracy.
 
 
+### Conclusions
+So far the best appraoch is the Random Forest one, reaching an accuracy of 99.47%, we can now finally proceed in re-training the model on the full training set given at the beginning of this essay (as a reminder, we split the original training set):
+
+```{r run rf on full set}
+randomForest <- train(classe~., data=trainDf, method="rf", trControl=fitControl)
+
+
+```
+
+Then we can proceed with making the prediction that we are required to do on the original test set:
+
+```{r run rf on full set1}
+preds <- predict(randomForest, newdata=testDf)
+```
+
+The preds variable will contain the predictions for the 20 rows we were given in the rest data set.
 
 ## References
 [1] http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har
