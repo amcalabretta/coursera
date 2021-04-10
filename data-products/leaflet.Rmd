@@ -14,6 +14,7 @@ todayD <- format(today, format="%B %d %Y")
 This Markdown document aims to show on a map the first 8 Listed US Companies by Market Cap on an US Map; We will start by importing the libraries needed:
 ```{r load}
 library(leaflet)
+leaflet()
 ```
 
 Then we create a dataframe, to hold the data we want to show on the map (see comments for details)
