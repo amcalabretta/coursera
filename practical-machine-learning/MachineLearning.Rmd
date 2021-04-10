@@ -144,6 +144,7 @@ set.seed(78282)
 
 ## References
 [1] http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har
+
 [2] https://www.r-bloggers.com/2014/03/near-zero-variance-predictors-should-we-remove-them/
 
 
