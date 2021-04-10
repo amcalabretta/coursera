@@ -608,9 +608,108 @@ testDf &lt;- read.csv(url(&quot;https://d396qusza40orc.cloudfront.net/predmachle
 <pre><code>## [1] 19622   160</code></pre>
 <pre class="r"><code>dim(testDf)</code></pre>
 <pre><code>## [1]  20 160</code></pre>
-<p>We can see that the train dataset has 19622 rows and 160 features, same number of features (as expected for the test dataset) and 20 rows; in the next paragraph we will have a look to the data quality:</p>
-<div id="data-cleansing" class="section level3">
-<h3>Data Cleansing</h3>
+<p>We can see that the train dataset has 19622 rows and 160 features, same number of features (as expected for the test dataset) and 20 rows; in the next paragraph we will try to reduce the number of variables in order to prepare the data to further analysis.</p>
+<div id="data-preparation" class="section level3">
+<h3>Data Preparation</h3>
+<p>Firt of all, we will prepare the data for further analysis, we will first remove the ones that wouldn’t contribute to the accuracy of the prediction (by common sense), than we will remove the columns with NAs, then the ones having a very low variance, and finally the ones showing a high correlation among each other.</p>
+<div id="removing-variables-that-would-not-contribute-to-predictions-accuracy" class="section level4">
+<h4>Removing Variables that would not contribute to prediction’s accuracy</h4>
+<p>Let’s have a quick look to the train dataset:</p>
+<pre class="r"><code>colnames(trainDf)</code></pre>
+<pre><code>##   [1] &quot;X&quot;                        &quot;user_name&quot;               
+##   [3] &quot;raw_timestamp_part_1&quot;     &quot;raw_timestamp_part_2&quot;    
+##   [5] &quot;cvtd_timestamp&quot;           &quot;new_window&quot;              
+##   [7] &quot;num_window&quot;               &quot;roll_belt&quot;               
+##   [9] &quot;pitch_belt&quot;               &quot;yaw_belt&quot;                
+##  [11] &quot;total_accel_belt&quot;         &quot;kurtosis_roll_belt&quot;      
+##  [13] &quot;kurtosis_picth_belt&quot;      &quot;kurtosis_yaw_belt&quot;       
+##  [15] &quot;skewness_roll_belt&quot;       &quot;skewness_roll_belt.1&quot;    
+##  [17] &quot;skewness_yaw_belt&quot;        &quot;max_roll_belt&quot;           
+##  [19] &quot;max_picth_belt&quot;           &quot;max_yaw_belt&quot;            
+##  [21] &quot;min_roll_belt&quot;            &quot;min_pitch_belt&quot;          
+##  [23] &quot;min_yaw_belt&quot;             &quot;amplitude_roll_belt&quot;     
+##  [25] &quot;amplitude_pitch_belt&quot;     &quot;amplitude_yaw_belt&quot;      
+##  [27] &quot;var_total_accel_belt&quot;     &quot;avg_roll_belt&quot;           
+##  [29] &quot;stddev_roll_belt&quot;         &quot;var_roll_belt&quot;           
+##  [31] &quot;avg_pitch_belt&quot;           &quot;stddev_pitch_belt&quot;       
+##  [33] &quot;var_pitch_belt&quot;           &quot;avg_yaw_belt&quot;            
+##  [35] &quot;stddev_yaw_belt&quot;          &quot;var_yaw_belt&quot;            
+##  [37] &quot;gyros_belt_x&quot;             &quot;gyros_belt_y&quot;            
+##  [39] &quot;gyros_belt_z&quot;             &quot;accel_belt_x&quot;            
+##  [41] &quot;accel_belt_y&quot;             &quot;accel_belt_z&quot;            
+##  [43] &quot;magnet_belt_x&quot;            &quot;magnet_belt_y&quot;           
+##  [45] &quot;magnet_belt_z&quot;            &quot;roll_arm&quot;                
+##  [47] &quot;pitch_arm&quot;                &quot;yaw_arm&quot;                 
+##  [49] &quot;total_accel_arm&quot;          &quot;var_accel_arm&quot;           
+##  [51] &quot;avg_roll_arm&quot;             &quot;stddev_roll_arm&quot;         
+##  [53] &quot;var_roll_arm&quot;             &quot;avg_pitch_arm&quot;           
+##  [55] &quot;stddev_pitch_arm&quot;         &quot;var_pitch_arm&quot;           
+##  [57] &quot;avg_yaw_arm&quot;              &quot;stddev_yaw_arm&quot;          
+##  [59] &quot;var_yaw_arm&quot;              &quot;gyros_arm_x&quot;             
+##  [61] &quot;gyros_arm_y&quot;              &quot;gyros_arm_z&quot;             
+##  [63] &quot;accel_arm_x&quot;              &quot;accel_arm_y&quot;             
+##  [65] &quot;accel_arm_z&quot;              &quot;magnet_arm_x&quot;            
+##  [67] &quot;magnet_arm_y&quot;             &quot;magnet_arm_z&quot;            
+##  [69] &quot;kurtosis_roll_arm&quot;        &quot;kurtosis_picth_arm&quot;      
+##  [71] &quot;kurtosis_yaw_arm&quot;         &quot;skewness_roll_arm&quot;       
+##  [73] &quot;skewness_pitch_arm&quot;       &quot;skewness_yaw_arm&quot;        
+##  [75] &quot;max_roll_arm&quot;             &quot;max_picth_arm&quot;           
+##  [77] &quot;max_yaw_arm&quot;              &quot;min_roll_arm&quot;            
+##  [79] &quot;min_pitch_arm&quot;            &quot;min_yaw_arm&quot;             
+##  [81] &quot;amplitude_roll_arm&quot;       &quot;amplitude_pitch_arm&quot;     
+##  [83] &quot;amplitude_yaw_arm&quot;        &quot;roll_dumbbell&quot;           
+##  [85] &quot;pitch_dumbbell&quot;           &quot;yaw_dumbbell&quot;            
+##  [87] &quot;kurtosis_roll_dumbbell&quot;   &quot;kurtosis_picth_dumbbell&quot; 
+##  [89] &quot;kurtosis_yaw_dumbbell&quot;    &quot;skewness_roll_dumbbell&quot;  
+##  [91] &quot;skewness_pitch_dumbbell&quot;  &quot;skewness_yaw_dumbbell&quot;   
+##  [93] &quot;max_roll_dumbbell&quot;        &quot;max_picth_dumbbell&quot;      
+##  [95] &quot;max_yaw_dumbbell&quot;         &quot;min_roll_dumbbell&quot;       
+##  [97] &quot;min_pitch_dumbbell&quot;       &quot;min_yaw_dumbbell&quot;        
+##  [99] &quot;amplitude_roll_dumbbell&quot;  &quot;amplitude_pitch_dumbbell&quot;
+## [101] &quot;amplitude_yaw_dumbbell&quot;   &quot;total_accel_dumbbell&quot;    
+## [103] &quot;var_accel_dumbbell&quot;       &quot;avg_roll_dumbbell&quot;       
+## [105] &quot;stddev_roll_dumbbell&quot;     &quot;var_roll_dumbbell&quot;       
+## [107] &quot;avg_pitch_dumbbell&quot;       &quot;stddev_pitch_dumbbell&quot;   
+## [109] &quot;var_pitch_dumbbell&quot;       &quot;avg_yaw_dumbbell&quot;        
+## [111] &quot;stddev_yaw_dumbbell&quot;      &quot;var_yaw_dumbbell&quot;        
+## [113] &quot;gyros_dumbbell_x&quot;         &quot;gyros_dumbbell_y&quot;        
+## [115] &quot;gyros_dumbbell_z&quot;         &quot;accel_dumbbell_x&quot;        
+## [117] &quot;accel_dumbbell_y&quot;         &quot;accel_dumbbell_z&quot;        
+## [119] &quot;magnet_dumbbell_x&quot;        &quot;magnet_dumbbell_y&quot;       
+## [121] &quot;magnet_dumbbell_z&quot;        &quot;roll_forearm&quot;            
+## [123] &quot;pitch_forearm&quot;            &quot;yaw_forearm&quot;             
+## [125] &quot;kurtosis_roll_forearm&quot;    &quot;kurtosis_picth_forearm&quot;  
+## [127] &quot;kurtosis_yaw_forearm&quot;     &quot;skewness_roll_forearm&quot;   
+## [129] &quot;skewness_pitch_forearm&quot;   &quot;skewness_yaw_forearm&quot;    
+## [131] &quot;max_roll_forearm&quot;         &quot;max_picth_forearm&quot;       
+## [133] &quot;max_yaw_forearm&quot;          &quot;min_roll_forearm&quot;        
+## [135] &quot;min_pitch_forearm&quot;        &quot;min_yaw_forearm&quot;         
+## [137] &quot;amplitude_roll_forearm&quot;   &quot;amplitude_pitch_forearm&quot; 
+## [139] &quot;amplitude_yaw_forearm&quot;    &quot;total_accel_forearm&quot;     
+## [141] &quot;var_accel_forearm&quot;        &quot;avg_roll_forearm&quot;        
+## [143] &quot;stddev_roll_forearm&quot;      &quot;var_roll_forearm&quot;        
+## [145] &quot;avg_pitch_forearm&quot;        &quot;stddev_pitch_forearm&quot;    
+## [147] &quot;var_pitch_forearm&quot;        &quot;avg_yaw_forearm&quot;         
+## [149] &quot;stddev_yaw_forearm&quot;       &quot;var_yaw_forearm&quot;         
+## [151] &quot;gyros_forearm_x&quot;          &quot;gyros_forearm_y&quot;         
+## [153] &quot;gyros_forearm_z&quot;          &quot;accel_forearm_x&quot;         
+## [155] &quot;accel_forearm_y&quot;          &quot;accel_forearm_z&quot;         
+## [157] &quot;magnet_forearm_x&quot;         &quot;magnet_forearm_y&quot;        
+## [159] &quot;magnet_forearm_z&quot;         &quot;classe&quot;</code></pre>
+<p>The first 5 variables seem to give very little information in terms of predicting the class variable, out of zealousness, we can create a new dataset for a simpler and more comprehensive view of those five variables:</p>
+<pre class="r"><code>uselessVar &lt;- trainDf[, (1:5)]
+head(uselessVar)</code></pre>
+<pre><code>##   X user_name raw_timestamp_part_1 raw_timestamp_part_2   cvtd_timestamp
+## 1 1  carlitos           1323084231               788290 05/12/2011 11:23
+## 2 2  carlitos           1323084231               808298 05/12/2011 11:23
+## 3 3  carlitos           1323084231               820366 05/12/2011 11:23
+## 4 4  carlitos           1323084232               120339 05/12/2011 11:23
+## 5 5  carlitos           1323084232               196328 05/12/2011 11:23
+## 6 6  carlitos           1323084232               304277 05/12/2011 11:23</code></pre>
+<p>The first variable seems to be an incremental identifier of each row, the user_name column is referring to the user of the device, the next three are clearly timestamps; we can start by removing those variables from our datasets:</p>
+<pre class="r"><code>trainDf &lt;- trainDf[, -(1:5)]
+testDf &lt;- testDf[, -(1:5)]</code></pre>
+</div>
 <div id="removing-nas" class="section level4">
 <h4>Removing NAs</h4>
 <p>We can generate an outline of the NAs in a simple way:</p>
@@ -633,46 +732,6 @@ Number of NAs
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-X
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-user_name
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-raw_timestamp_part_1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-raw_timestamp_part_2
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-cvtd_timestamp
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
 <tr>
 <td style="text-align:left;">
 new_window
@@ -1922,12 +1981,19 @@ trainDf &lt;- trainDf[,-indexesToRemove]
 testDf &lt;- testDf[,-indexesToRemove]</code></pre>
 <p>The number of columns is now:</p>
 <pre class="r"><code>ncol(trainDf)</code></pre>
-<pre><code>## [1] 93</code></pre>
+<pre><code>## [1] 88</code></pre>
 <p>We reduced the number of columns to 93 (from 160).</p>
+</div>
+<div id="removing-variables-with-low-variance" class="section level4">
+<h4>Removing Variables with low variance</h4>
+</div>
+<div id="removing-variables-that-would-not-contribute-to-predictions-accuracy-1" class="section level4">
+<h4>Removing Variables that would not contribute to prediction’s accuracy</h4>
 </div>
 </div>
 <div id="further-reduction-of-variables" class="section level3">
 <h3>Further reduction of variables</h3>
+<p>A quick peek to the train</p>
 <p>##Machine Learning - based predictions. In this paragraph we will apply three techniques:Classification Trees, Random Forests and Generalized Boosted Model.</p>
 <p>###Classification Trees</p>
 <pre class="r"><code>set.seed(78282)

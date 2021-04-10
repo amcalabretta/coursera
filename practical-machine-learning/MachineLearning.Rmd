@@ -42,7 +42,8 @@ dim(trainDf)
 dim(testDf)
 ```
 
-We can see that the train dataset has 19622 rows and 160 features, same number of features (as expected for the test dataset) and 20 rows; in the next paragraph we will have a look to the data quality:
+We can see that the train dataset has 19622 rows and 160 features, same number of features (as expected for the test dataset) and 20 rows; in the next paragraph we will try to reduce the number of variables in order to prepare the data to further analysis.
+
 
 ### Data Preparation
 Firt of all, we will prepare the data for further analysis, we will first remove the ones that wouldn't contribute to the accuracy of the prediction (by common sense), than we will remove the columns with NAs, then the ones having a very low variance, and finally the ones showing a high correlation among each other.
@@ -50,8 +51,23 @@ Firt of all, we will prepare the data for further analysis, we will first remove
 #### Removing Variables that would not contribute to prediction's accuracy
 Let's have a quick look to the train dataset:
 
+```{r varToBeRemoved}
+colnames(trainDf)
+```
 
+The first 5 variables seem to give very little information in terms of predicting the class variable, out of zealousness, we can create a new dataset for a simpler and more comprehensive view of those five variables:
 
+```{r uselessCheck}
+uselessVar <- trainDf[, (1:5)]
+head(uselessVar)
+```
+
+The first variable seems to be an incremental identifier of each row, the user_name column is referring to the user of the device, the next three are clearly timestamps; we can start by removing those variables from our datasets:
+
+```{r removeUseless}
+trainDf <- trainDf[, -(1:5)]
+testDf <- testDf[, -(1:5)]
+```
 
 
 
@@ -82,9 +98,11 @@ The number of columns is now:
 ncol(trainDf)
 ```
 
-We reduced the number of columns to 93 (from 160).
+We reduced the number of columns to 93.
 
 #### Removing Variables with low variance
+Time to have a look at the variance, for the sake of simplicity, we will just remove the variables having low variance; it must be noted tho that just removing variables with little or not variance is *not* necessarily a best practice.
+
 
 #### Removing Variables that would not contribute to prediction's accuracy
 
