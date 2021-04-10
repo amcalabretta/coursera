@@ -5,7 +5,11 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+today <- Sys.Date()
+todayD <- format(today, format="%B %d %Y")
 ```
+
+<h1>`r todayD`</h1>
 
 This Markdown document aims to show on a map the first 8 Listed US Companies by Market Cap on an US Map; We will start by importing the libraries needed:
 ```{r load}
@@ -18,25 +22,24 @@ Then we create a dataframe, to hold the data we want to show on the map (see com
 ```{r create_df}
 Company <- c('Microsoft','Apple','Amazon','Alphabet','Berkshire Hathaway','Facebook','Johnson & Johnson','Exxon Mobil') #Companies
 MarketCap <- c(904.86, 895.67, 874.71,818.16,493.75,475.73,372.23,342.17) #Market Cap
-lat <- c(47.6493198, 37.33, 47.61,37.422,41.25,37.45,40.486, 32.49) #Latitude of HQ
-lng <- c(237.8658351236, 238, 237.67,237.916,264,237.82,74.44, 96.57) #Longitude of HQ
+lat <- c(47.6493198, 37.3229978, 47.608013,37.386051,41.257160,37.452961,40.4862158, 32.819595) #Latitude of HQ
+lng <- c(-122.121513, -122.0321823, -122.335167,-122.083855, -95.995102,-122.181725,-74.4518188,  -96.945419) #Longitude of HQ
 df <- data.frame(Company, MarketCap,lat,lng)
 ```
 
-Here the map is being created, we aim to 
-
-
+Here the map is being created: 
 
 ```{r map}
+
 map <-  df %>%
   leaflet()  %>%
   addTiles()  %>%
-  setView(41.25, 264, zoom = 4) %>% 
+  setView(lat = 39.742043, lng=-104.991531, zoom = 4) %>% 
   addCircleMarkers(df$lng, df$lat, radius = df$MarketCap/100, popup=paste("Company:", df$Company, "<br>",
-                           "Market Cap:", df$MarketCap)) %>%
-  addLegend("bottomright", colors= "#13ED3F", labels="Starbucks", title="Top 8 US Companies by Market Cap (Headquarters)")
+                           "Market Cap:", df$MarketCap)) 
 map
 ```
+
 
 
 
