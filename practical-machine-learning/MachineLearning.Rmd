@@ -24,6 +24,7 @@ library(grid)
 library(rpart)
 library(rpart.plot)
 library(rattle)
+library(ggcorrplot)
 ```
 
 We can now dowload the datasets provided and load them in two dataframe (train/test):
@@ -55,18 +56,18 @@ Let's have a quick look to the train dataset:
 colnames(trainDf)
 ```
 
-The first 5 variables seem to give very little information in terms of predicting the class variable, out of zealousness, we can create a new dataset for a simpler and more comprehensive view of those five variables:
+The first 7 variables seem to give very little information in terms of predicting the class variable, out of zealousness, we can create a new dataset for a simpler and more comprehensive view of those five variables:
 
 ```{r uselessCheck}
-uselessVar <- trainDf[, (1:5)]
+uselessVar <- trainDf[, (1:7)]
 head(uselessVar)
 ```
 
-The first variable seems to be an incremental identifier of each row, the user_name column is referring to the user of the device, the next three are clearly timestamps; we can start by removing those variables from our datasets:
+The first variable seems to be an incremental identifier of each row, the user_name column is referring to the user of the device, the next three are clearly timestamps and the last 2 seems to refer to the execution context of the devide; we can start by removing those variables from our datasets:
 
 ```{r removeUseless}
-trainDf <- trainDf[, -(1:5)]
-testDf <- testDf[, -(1:5)]
+trainDf <- trainDf[, -(1:7)]
+testDf <- testDf[, -(1:7)]
 ```
 
 
@@ -81,7 +82,7 @@ We can generate an outline of the NAs in a simple way:
 sapply( trainDf, function(x) sum(is.na(x))) %>%
   kable(col.names = c("Number of NAs"), caption="Number of NAs per column") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed",fixed_thead = T)) %>%
-  scroll_box(width = "500px", height = "500px")
+  scroll_box(width = "500px", height = "200px")
 ```
 
 We can see that all the columns having NAs have a considerable amount of NAs (19216) covering more than  97% of the rows, we then can definitely remove those columns from both train and test datasets:
@@ -98,7 +99,7 @@ The number of columns is now:
 ncol(trainDf)
 ```
 
-We reduced the number of columns to 88.
+We reduced the number of columns to 86.
 
 #### Removing Variables with low variance
 Time to have a look at the variance, for the sake of simplicity, we will just remove the variables having low variance; it must be noted tho that just removing variables with little or not variance is *not* necessarily a best practice (see [2] for details) but for the sake of this essay, we decide to just remove them.
@@ -114,13 +115,34 @@ Looking at the number of columns now gives:
 
 ```{r columnsAfterLowVarRemoval}
 ncol(trainDf)
-
 ```
 
-We now have 54 variables (from the original 160).
+We now have 53 variables (from the original 160).
 
 #### Correlation among variables
+Since correlation works only with numerical variables, we now create a new dataframe out of the train data set removing the only factor variable classe (which is the one that we want to predict).
 
+
+```{r train correlation Data Frame}
+trainCorrelationDf = trainDf[ , -which(names(trainDf) %in% c("classe"))]
+```
+
+Then we calculate the correlation among the variables and plot the correlation:
+
+```{r train correlation calc}
+trainCorrelationDf <- round(cor(trainCorrelationDf), 2)
+
+ggcorrplot(trainCorrelationDf, hc.order = TRUE, 
+           type = "lower", 
+           lab = TRUE, 
+           lab_size = 3, 
+           method="circle", 
+           colors = c("tomato2", "white", "springgreen3"), 
+           title="Correlation among variables", 
+           ggtheme=theme_bw)
+```
+
+We can see from the plot above (all tho not clearly visible due to the number of variables) that some of the variables have some sort of correlation, we proceed now in
 
 
 ##Machine Learning - based predictions.
@@ -146,5 +168,4 @@ set.seed(78282)
 [1] http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har
 
 [2] https://www.r-bloggers.com/2014/03/near-zero-variance-predictors-should-we-remove-them/
-
 
