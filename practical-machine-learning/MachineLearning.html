@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -46,6 +46,15 @@ if (!!window.navigator.userAgent.match("MSIE 8")) {
 !function(a){"use strict";a.matchMedia=a.matchMedia||function(a){var b,c=a.documentElement,d=c.firstElementChild||c.firstChild,e=a.createElement("body"),f=a.createElement("div");return f.id="mq-test-1",f.style.cssText="position:absolute;top:-100em",e.style.background="none",e.appendChild(f),function(a){return f.innerHTML='&shy;<style media="'+a+'"> #mq-test-1 { width: 42px; }</style>',c.insertBefore(e,d),b=42===f.offsetWidth,c.removeChild(e),{matches:b,media:a}}}(a.document)}(this),function(a){"use strict";function b(){u(!0)}var c={};a.respond=c,c.update=function(){};var d=[],e=function(){var b=!1;try{b=new a.XMLHttpRequest}catch(c){b=new a.ActiveXObject("Microsoft.XMLHTTP")}return function(){return b}}(),f=function(a,b){var c=e();c&&(c.open("GET",a,!0),c.onreadystatechange=function(){4!==c.readyState||200!==c.status&&304!==c.status||b(c.responseText)},4!==c.readyState&&c.send(null))};if(c.ajax=f,c.queue=d,c.regex={media:/@media[^\{]+\{([^\{\}]*\{[^\}\{]*\})+/gi,keyframes:/@(?:\-(?:o|moz|webkit)\-)?keyframes[^\{]+\{(?:[^\{\}]*\{[^\}\{]*\})+[^\}]*\}/gi,urls:/(url\()['"]?([^\/\)'"][^:\)'"]+)['"]?(\))/g,findStyles:/@media *([^\{]+)\{([\S\s]+?)$/,only:/(only\s+)?([a-zA-Z]+)\s?/,minw:/\([\s]*min\-width\s*:[\s]*([\s]*[0-9\.]+)(px|em)[\s]*\)/,maxw:/\([\s]*max\-width\s*:[\s]*([\s]*[0-9\.]+)(px|em)[\s]*\)/},c.mediaQueriesSupported=a.matchMedia&&null!==a.matchMedia("only all")&&a.matchMedia("only all").matches,!c.mediaQueriesSupported){var g,h,i,j=a.document,k=j.documentElement,l=[],m=[],n=[],o={},p=30,q=j.getElementsByTagName("head")[0]||k,r=j.getElementsByTagName("base")[0],s=q.getElementsByTagName("link"),t=function(){var a,b=j.createElement("div"),c=j.body,d=k.style.fontSize,e=c&&c.style.fontSize,f=!1;return b.style.cssText="position:absolute;font-size:1em;width:1em",c||(c=f=j.createElement("body"),c.style.background="none"),k.style.fontSize="100%",c.style.fontSize="100%",c.appendChild(b),f&&k.insertBefore(c,k.firstChild),a=b.offsetWidth,f?k.removeChild(c):c.removeChild(b),k.style.fontSize=d,e&&(c.style.fontSize=e),a=i=parseFloat(a)},u=function(b){var c="clientWidth",d=k[c],e="CSS1Compat"===j.compatMode&&d||j.body[c]||d,f={},o=s[s.length-1],r=(new Date).getTime();if(b&&g&&p>r-g)return a.clearTimeout(h),h=a.setTimeout(u,p),void 0;g=r;for(var v in l)if(l.hasOwnProperty(v)){var w=l[v],x=w.minw,y=w.maxw,z=null===x,A=null===y,B="em";x&&(x=parseFloat(x)*(x.indexOf(B)>-1?i||t():1)),y&&(y=parseFloat(y)*(y.indexOf(B)>-1?i||t():1)),w.hasquery&&(z&&A||!(z||e>=x)||!(A||y>=e))||(f[w.media]||(f[w.media]=[]),f[w.media].push(m[w.rules]))}for(var C in n)n.hasOwnProperty(C)&&n[C]&&n[C].parentNode===q&&q.removeChild(n[C]);n.length=0;for(var D in f)if(f.hasOwnProperty(D)){var E=j.createElement("style"),F=f[D].join("\n");E.type="text/css",E.media=D,q.insertBefore(E,o.nextSibling),E.styleSheet?E.styleSheet.cssText=F:E.appendChild(j.createTextNode(F)),n.push(E)}},v=function(a,b,d){var e=a.replace(c.regex.keyframes,"").match(c.regex.media),f=e&&e.length||0;b=b.substring(0,b.lastIndexOf("/"));var g=function(a){return a.replace(c.regex.urls,"$1"+b+"$2$3")},h=!f&&d;b.length&&(b+="/"),h&&(f=1);for(var i=0;f>i;i++){var j,k,n,o;h?(j=d,m.push(g(a))):(j=e[i].match(c.regex.findStyles)&&RegExp.$1,m.push(RegExp.$2&&g(RegExp.$2))),n=j.split(","),o=n.length;for(var p=0;o>p;p++)k=n[p],l.push({media:k.split("(")[0].match(c.regex.only)&&RegExp.$2||"all",rules:m.length-1,hasquery:k.indexOf("(")>-1,minw:k.match(c.regex.minw)&&parseFloat(RegExp.$1)+(RegExp.$2||""),maxw:k.match(c.regex.maxw)&&parseFloat(RegExp.$1)+(RegExp.$2||"")})}u()},w=function(){if(d.length){var b=d.shift();f(b.href,function(c){v(c,b.href,b.media),o[b.href]=!0,a.setTimeout(function(){w()},0)})}},x=function(){for(var b=0;b<s.length;b++){var c=s[b],e=c.href,f=c.media,g=c.rel&&"stylesheet"===c.rel.toLowerCase();e&&g&&!o[e]&&(c.styleSheet&&c.styleSheet.rawCssText?(v(c.styleSheet.rawCssText,e,f),o[e]=!0):(!/^([a-zA-Z:]*\/\/)/.test(e)&&!r||e.replace(RegExp.$1,"").split("/")[0]===a.location.host)&&("//"===e.substring(0,2)&&(e=a.location.protocol+e),d.push({href:e,media:f})))}w()};x(),c.update=x,c.getEmValue=t,a.addEventListener?a.addEventListener("resize",b,!1):a.attachEvent&&a.attachEvent("onresize",b)}}(this);
 };
 </script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script>
 
 /**
@@ -216,13 +225,232 @@ color: #d14;
     }
 });
 </script>
+<style type="text/css">
+.lightable-minimal {
+border-collapse: separate;
+border-spacing: 16px 1px;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-minimal td {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal th {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal thead tr:last-child th {
+border-bottom: 2px solid #00000050;
+empty-cells: hide;
+}
+.lightable-minimal tbody tr:first-child td {
+padding-top: 0.5em;
+}
+.lightable-minimal.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-minimal.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic {
+border-top: 0.16em solid #111111;
+border-bottom: 0.16em solid #111111;
+width: 100%;
+margin-bottom: 10px;
+margin: 10px 5px;
+}
+.lightable-classic tfoot tr td {
+border: 0;
+}
+.lightable-classic tfoot tr:first-child td {
+border-top: 0.14em solid #111111;
+}
+.lightable-classic caption {
+color: #222222;
+}
+.lightable-classic td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic thead tr:last-child th {
+border-bottom: 0.10em solid #111111;
+}
+.lightable-classic.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic-2 {
+border-top: 3px double #111111;
+border-bottom: 3px double #111111;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-classic-2 tfoot tr td {
+border: 0;
+}
+.lightable-classic-2 tfoot tr:first-child td {
+border-top: 3px double #111111;
+}
+.lightable-classic-2 caption {
+color: #222222;
+}
+.lightable-classic-2 td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic-2 th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic-2 tbody tr:last-child td {
+border-bottom: 3px double #111111;
+}
+.lightable-classic-2 thead tr:last-child th {
+border-bottom: 1px solid #111111;
+}
+.lightable-classic-2.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic-2.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #EEE;
+border-collapse: collapse;
+margin-bottom: 10px;
+}
+.lightable-material tfoot tr td {
+border: 0;
+}
+.lightable-material tfoot tr:first-child td {
+border-top: 1px solid #EEE;
+}
+.lightable-material th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+}
+.lightable-material td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+border-top: 1px solid #eeeeee;
+}
+.lightable-material.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #ddd;
+}
+.lightable-material-dark {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #FFFFFF12;
+border-collapse: collapse;
+margin-bottom: 10px;
+background-color: #363640;
+}
+.lightable-material-dark tfoot tr td {
+border: 0;
+}
+.lightable-material-dark tfoot tr:first-child td {
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF60;
+}
+.lightable-material-dark td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF;
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark.lightable-hover tbody tr:hover {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody tr:nth-child(even) {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material-dark.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #FFFFFF12;
+}
+.lightable-paper {
+width: 100%;
+margin-bottom: 10px;
+color: #444;
+}
+.lightable-paper tfoot tr td {
+border: 0;
+}
+.lightable-paper tfoot tr:first-child td {
+border-top: 1px solid #00000020;
+}
+.lightable-paper thead tr:last-child th {
+color: #666;
+vertical-align: bottom;
+border-bottom: 1px solid #00000020;
+line-height: 1.15em;
+padding: 10px 5px;
+}
+.lightable-paper td {
+vertical-align: middle;
+border-bottom: 1px solid #00000010;
+line-height: 1.15em;
+padding: 7px 5px;
+}
+.lightable-paper.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-paper.lightable-striped tbody tr:nth-child(even) {
+background-color: #00000008;
+}
+.lightable-paper.lightable-striped tbody td {
+border: 0;
+}
+</style>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -235,32 +463,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -271,13 +474,8 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -291,6 +489,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -303,7 +504,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -339,6 +539,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -350,18 +551,6 @@ summary {
   display: none;
 }
 </style>
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
 
 <!-- code folding -->
 
@@ -378,7 +567,7 @@ $(document).ready(function () {
 
 
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -402,100 +591,30 @@ library(kableExtra)
 library(plyr)
 library(ggplot2)
 library(gridExtra)
-library(grid)</code></pre>
+library(grid)
+library(rpart)
+library(rpart.plot)
+library(rattle)</code></pre>
+<pre><code>## Loading required package: tibble</code></pre>
+<pre><code>## Loading required package: bitops</code></pre>
+<pre><code>## Rattle: A free graphical interface for data science with R.
+## Version 5.4.0 Copyright (c) 2006-2020 Togaware Pty Ltd.
+## Type 'rattle()' to shake, rattle, and roll your data.</code></pre>
 <p>We can now dowload the datasets provided and load them in two dataframe (train/test):</p>
-<pre class="r"><code>trainDf &lt;- read.csv(url(&quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv&quot;),header=TRUE)
+<pre class="r"><code>trainDf &lt;- read.csv(url(&quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;),header=TRUE)
 testDf &lt;- read.csv(url(&quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv&quot;),header=TRUE)</code></pre>
-<p>A quick glance to the columns gives:</p>
-<pre class="r"><code>names(trainDf)</code></pre>
-<pre><code>##   [1] &quot;X&quot;                        &quot;user_name&quot;               
-##   [3] &quot;raw_timestamp_part_1&quot;     &quot;raw_timestamp_part_2&quot;    
-##   [5] &quot;cvtd_timestamp&quot;           &quot;new_window&quot;              
-##   [7] &quot;num_window&quot;               &quot;roll_belt&quot;               
-##   [9] &quot;pitch_belt&quot;               &quot;yaw_belt&quot;                
-##  [11] &quot;total_accel_belt&quot;         &quot;kurtosis_roll_belt&quot;      
-##  [13] &quot;kurtosis_picth_belt&quot;      &quot;kurtosis_yaw_belt&quot;       
-##  [15] &quot;skewness_roll_belt&quot;       &quot;skewness_roll_belt.1&quot;    
-##  [17] &quot;skewness_yaw_belt&quot;        &quot;max_roll_belt&quot;           
-##  [19] &quot;max_picth_belt&quot;           &quot;max_yaw_belt&quot;            
-##  [21] &quot;min_roll_belt&quot;            &quot;min_pitch_belt&quot;          
-##  [23] &quot;min_yaw_belt&quot;             &quot;amplitude_roll_belt&quot;     
-##  [25] &quot;amplitude_pitch_belt&quot;     &quot;amplitude_yaw_belt&quot;      
-##  [27] &quot;var_total_accel_belt&quot;     &quot;avg_roll_belt&quot;           
-##  [29] &quot;stddev_roll_belt&quot;         &quot;var_roll_belt&quot;           
-##  [31] &quot;avg_pitch_belt&quot;           &quot;stddev_pitch_belt&quot;       
-##  [33] &quot;var_pitch_belt&quot;           &quot;avg_yaw_belt&quot;            
-##  [35] &quot;stddev_yaw_belt&quot;          &quot;var_yaw_belt&quot;            
-##  [37] &quot;gyros_belt_x&quot;             &quot;gyros_belt_y&quot;            
-##  [39] &quot;gyros_belt_z&quot;             &quot;accel_belt_x&quot;            
-##  [41] &quot;accel_belt_y&quot;             &quot;accel_belt_z&quot;            
-##  [43] &quot;magnet_belt_x&quot;            &quot;magnet_belt_y&quot;           
-##  [45] &quot;magnet_belt_z&quot;            &quot;roll_arm&quot;                
-##  [47] &quot;pitch_arm&quot;                &quot;yaw_arm&quot;                 
-##  [49] &quot;total_accel_arm&quot;          &quot;var_accel_arm&quot;           
-##  [51] &quot;avg_roll_arm&quot;             &quot;stddev_roll_arm&quot;         
-##  [53] &quot;var_roll_arm&quot;             &quot;avg_pitch_arm&quot;           
-##  [55] &quot;stddev_pitch_arm&quot;         &quot;var_pitch_arm&quot;           
-##  [57] &quot;avg_yaw_arm&quot;              &quot;stddev_yaw_arm&quot;          
-##  [59] &quot;var_yaw_arm&quot;              &quot;gyros_arm_x&quot;             
-##  [61] &quot;gyros_arm_y&quot;              &quot;gyros_arm_z&quot;             
-##  [63] &quot;accel_arm_x&quot;              &quot;accel_arm_y&quot;             
-##  [65] &quot;accel_arm_z&quot;              &quot;magnet_arm_x&quot;            
-##  [67] &quot;magnet_arm_y&quot;             &quot;magnet_arm_z&quot;            
-##  [69] &quot;kurtosis_roll_arm&quot;        &quot;kurtosis_picth_arm&quot;      
-##  [71] &quot;kurtosis_yaw_arm&quot;         &quot;skewness_roll_arm&quot;       
-##  [73] &quot;skewness_pitch_arm&quot;       &quot;skewness_yaw_arm&quot;        
-##  [75] &quot;max_roll_arm&quot;             &quot;max_picth_arm&quot;           
-##  [77] &quot;max_yaw_arm&quot;              &quot;min_roll_arm&quot;            
-##  [79] &quot;min_pitch_arm&quot;            &quot;min_yaw_arm&quot;             
-##  [81] &quot;amplitude_roll_arm&quot;       &quot;amplitude_pitch_arm&quot;     
-##  [83] &quot;amplitude_yaw_arm&quot;        &quot;roll_dumbbell&quot;           
-##  [85] &quot;pitch_dumbbell&quot;           &quot;yaw_dumbbell&quot;            
-##  [87] &quot;kurtosis_roll_dumbbell&quot;   &quot;kurtosis_picth_dumbbell&quot; 
-##  [89] &quot;kurtosis_yaw_dumbbell&quot;    &quot;skewness_roll_dumbbell&quot;  
-##  [91] &quot;skewness_pitch_dumbbell&quot;  &quot;skewness_yaw_dumbbell&quot;   
-##  [93] &quot;max_roll_dumbbell&quot;        &quot;max_picth_dumbbell&quot;      
-##  [95] &quot;max_yaw_dumbbell&quot;         &quot;min_roll_dumbbell&quot;       
-##  [97] &quot;min_pitch_dumbbell&quot;       &quot;min_yaw_dumbbell&quot;        
-##  [99] &quot;amplitude_roll_dumbbell&quot;  &quot;amplitude_pitch_dumbbell&quot;
-## [101] &quot;amplitude_yaw_dumbbell&quot;   &quot;total_accel_dumbbell&quot;    
-## [103] &quot;var_accel_dumbbell&quot;       &quot;avg_roll_dumbbell&quot;       
-## [105] &quot;stddev_roll_dumbbell&quot;     &quot;var_roll_dumbbell&quot;       
-## [107] &quot;avg_pitch_dumbbell&quot;       &quot;stddev_pitch_dumbbell&quot;   
-## [109] &quot;var_pitch_dumbbell&quot;       &quot;avg_yaw_dumbbell&quot;        
-## [111] &quot;stddev_yaw_dumbbell&quot;      &quot;var_yaw_dumbbell&quot;        
-## [113] &quot;gyros_dumbbell_x&quot;         &quot;gyros_dumbbell_y&quot;        
-## [115] &quot;gyros_dumbbell_z&quot;         &quot;accel_dumbbell_x&quot;        
-## [117] &quot;accel_dumbbell_y&quot;         &quot;accel_dumbbell_z&quot;        
-## [119] &quot;magnet_dumbbell_x&quot;        &quot;magnet_dumbbell_y&quot;       
-## [121] &quot;magnet_dumbbell_z&quot;        &quot;roll_forearm&quot;            
-## [123] &quot;pitch_forearm&quot;            &quot;yaw_forearm&quot;             
-## [125] &quot;kurtosis_roll_forearm&quot;    &quot;kurtosis_picth_forearm&quot;  
-## [127] &quot;kurtosis_yaw_forearm&quot;     &quot;skewness_roll_forearm&quot;   
-## [129] &quot;skewness_pitch_forearm&quot;   &quot;skewness_yaw_forearm&quot;    
-## [131] &quot;max_roll_forearm&quot;         &quot;max_picth_forearm&quot;       
-## [133] &quot;max_yaw_forearm&quot;          &quot;min_roll_forearm&quot;        
-## [135] &quot;min_pitch_forearm&quot;        &quot;min_yaw_forearm&quot;         
-## [137] &quot;amplitude_roll_forearm&quot;   &quot;amplitude_pitch_forearm&quot; 
-## [139] &quot;amplitude_yaw_forearm&quot;    &quot;total_accel_forearm&quot;     
-## [141] &quot;var_accel_forearm&quot;        &quot;avg_roll_forearm&quot;        
-## [143] &quot;stddev_roll_forearm&quot;      &quot;var_roll_forearm&quot;        
-## [145] &quot;avg_pitch_forearm&quot;        &quot;stddev_pitch_forearm&quot;    
-## [147] &quot;var_pitch_forearm&quot;        &quot;avg_yaw_forearm&quot;         
-## [149] &quot;stddev_yaw_forearm&quot;       &quot;var_yaw_forearm&quot;         
-## [151] &quot;gyros_forearm_x&quot;          &quot;gyros_forearm_y&quot;         
-## [153] &quot;gyros_forearm_z&quot;          &quot;accel_forearm_x&quot;         
-## [155] &quot;accel_forearm_y&quot;          &quot;accel_forearm_z&quot;         
-## [157] &quot;magnet_forearm_x&quot;         &quot;magnet_forearm_y&quot;        
-## [159] &quot;magnet_forearm_z&quot;         &quot;problem_id&quot;</code></pre>
-<p>Gives quite some column (160) whilst the number of rows can be easily found:</p>
-<pre class="r"><code>nrow(trainDf)</code></pre>
-<pre><code>## [1] 20</code></pre>
-<p>in the next paragraph we will have a look to the data quality:</p>
+<p>A quick glance to the train/test dataset gives:</p>
+<pre class="r"><code>dim(trainDf)</code></pre>
+<pre><code>## [1] 19622   160</code></pre>
+<pre class="r"><code>dim(testDf)</code></pre>
+<pre><code>## [1]  20 160</code></pre>
+<p>We can see that the train dataset has 19622 rows and 160 features, same number of features (as expected for the test dataset) and 20 rows; in the next paragraph we will have a look to the data quality:</p>
 <div id="data-cleansing" class="section level3">
 <h3>Data Cleansing</h3>
+<div id="removing-nas" class="section level4">
+<h4>Removing NAs</h4>
 <p>We can generate an outline of the NAs in a simple way:</p>
-<pre class="r"><code>sapply( trainDf, function(x) sum(is.na(x)))%&gt;%
+<pre class="r"><code>sapply( trainDf, function(x) sum(is.na(x))) %&gt;%
   kable(col.names = c(&quot;Number of NAs&quot;), caption=&quot;Number of NAs per column&quot;) %&gt;%
   kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;, &quot;condensed&quot;,fixed_thead = T)) %&gt;%
   scroll_box(width = &quot;500px&quot;, height = &quot;500px&quot;)</code></pre>
@@ -607,7 +726,7 @@ total_accel_belt
 kurtosis_roll_belt
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -615,7 +734,7 @@ kurtosis_roll_belt
 kurtosis_picth_belt
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -623,7 +742,7 @@ kurtosis_picth_belt
 kurtosis_yaw_belt
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -631,7 +750,7 @@ kurtosis_yaw_belt
 skewness_roll_belt
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -639,7 +758,7 @@ skewness_roll_belt
 skewness_roll_belt.1
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -647,7 +766,7 @@ skewness_roll_belt.1
 skewness_yaw_belt
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -655,7 +774,7 @@ skewness_yaw_belt
 max_roll_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -663,7 +782,7 @@ max_roll_belt
 max_picth_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -671,7 +790,7 @@ max_picth_belt
 max_yaw_belt
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -679,7 +798,7 @@ max_yaw_belt
 min_roll_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -687,7 +806,7 @@ min_roll_belt
 min_pitch_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -695,7 +814,7 @@ min_pitch_belt
 min_yaw_belt
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -703,7 +822,7 @@ min_yaw_belt
 amplitude_roll_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -711,7 +830,7 @@ amplitude_roll_belt
 amplitude_pitch_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -719,7 +838,7 @@ amplitude_pitch_belt
 amplitude_yaw_belt
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -727,7 +846,7 @@ amplitude_yaw_belt
 var_total_accel_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -735,7 +854,7 @@ var_total_accel_belt
 avg_roll_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -743,7 +862,7 @@ avg_roll_belt
 stddev_roll_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -751,7 +870,7 @@ stddev_roll_belt
 var_roll_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -759,7 +878,7 @@ var_roll_belt
 avg_pitch_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -767,7 +886,7 @@ avg_pitch_belt
 stddev_pitch_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -775,7 +894,7 @@ stddev_pitch_belt
 var_pitch_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -783,7 +902,7 @@ var_pitch_belt
 avg_yaw_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -791,7 +910,7 @@ avg_yaw_belt
 stddev_yaw_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -799,7 +918,7 @@ stddev_yaw_belt
 var_yaw_belt
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -911,7 +1030,7 @@ total_accel_arm
 var_accel_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -919,7 +1038,7 @@ var_accel_arm
 avg_roll_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -927,7 +1046,7 @@ avg_roll_arm
 stddev_roll_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -935,7 +1054,7 @@ stddev_roll_arm
 var_roll_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -943,7 +1062,7 @@ var_roll_arm
 avg_pitch_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -951,7 +1070,7 @@ avg_pitch_arm
 stddev_pitch_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -959,7 +1078,7 @@ stddev_pitch_arm
 var_pitch_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -967,7 +1086,7 @@ var_pitch_arm
 avg_yaw_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -975,7 +1094,7 @@ avg_yaw_arm
 stddev_yaw_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -983,7 +1102,7 @@ stddev_yaw_arm
 var_yaw_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1063,7 +1182,7 @@ magnet_arm_z
 kurtosis_roll_arm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1071,7 +1190,7 @@ kurtosis_roll_arm
 kurtosis_picth_arm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1079,7 +1198,7 @@ kurtosis_picth_arm
 kurtosis_yaw_arm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1087,7 +1206,7 @@ kurtosis_yaw_arm
 skewness_roll_arm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1095,7 +1214,7 @@ skewness_roll_arm
 skewness_pitch_arm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1103,7 +1222,7 @@ skewness_pitch_arm
 skewness_yaw_arm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1111,7 +1230,7 @@ skewness_yaw_arm
 max_roll_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1119,7 +1238,7 @@ max_roll_arm
 max_picth_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1127,7 +1246,7 @@ max_picth_arm
 max_yaw_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1135,7 +1254,7 @@ max_yaw_arm
 min_roll_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1143,7 +1262,7 @@ min_roll_arm
 min_pitch_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1151,7 +1270,7 @@ min_pitch_arm
 min_yaw_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1159,7 +1278,7 @@ min_yaw_arm
 amplitude_roll_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1167,7 +1286,7 @@ amplitude_roll_arm
 amplitude_pitch_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1175,7 +1294,7 @@ amplitude_pitch_arm
 amplitude_yaw_arm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1207,7 +1326,7 @@ yaw_dumbbell
 kurtosis_roll_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1215,7 +1334,7 @@ kurtosis_roll_dumbbell
 kurtosis_picth_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1223,7 +1342,7 @@ kurtosis_picth_dumbbell
 kurtosis_yaw_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1231,7 +1350,7 @@ kurtosis_yaw_dumbbell
 skewness_roll_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1239,7 +1358,7 @@ skewness_roll_dumbbell
 skewness_pitch_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1247,7 +1366,7 @@ skewness_pitch_dumbbell
 skewness_yaw_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1255,7 +1374,7 @@ skewness_yaw_dumbbell
 max_roll_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1263,7 +1382,7 @@ max_roll_dumbbell
 max_picth_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1271,7 +1390,7 @@ max_picth_dumbbell
 max_yaw_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1279,7 +1398,7 @@ max_yaw_dumbbell
 min_roll_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1287,7 +1406,7 @@ min_roll_dumbbell
 min_pitch_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1295,7 +1414,7 @@ min_pitch_dumbbell
 min_yaw_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1303,7 +1422,7 @@ min_yaw_dumbbell
 amplitude_roll_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1311,7 +1430,7 @@ amplitude_roll_dumbbell
 amplitude_pitch_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1319,7 +1438,7 @@ amplitude_pitch_dumbbell
 amplitude_yaw_dumbbell
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1335,7 +1454,7 @@ total_accel_dumbbell
 var_accel_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1343,7 +1462,7 @@ var_accel_dumbbell
 avg_roll_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1351,7 +1470,7 @@ avg_roll_dumbbell
 stddev_roll_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1359,7 +1478,7 @@ stddev_roll_dumbbell
 var_roll_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1367,7 +1486,7 @@ var_roll_dumbbell
 avg_pitch_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1375,7 +1494,7 @@ avg_pitch_dumbbell
 stddev_pitch_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1383,7 +1502,7 @@ stddev_pitch_dumbbell
 var_pitch_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1391,7 +1510,7 @@ var_pitch_dumbbell
 avg_yaw_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1399,7 +1518,7 @@ avg_yaw_dumbbell
 stddev_yaw_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1407,7 +1526,7 @@ stddev_yaw_dumbbell
 var_yaw_dumbbell
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1511,7 +1630,7 @@ yaw_forearm
 kurtosis_roll_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1519,7 +1638,7 @@ kurtosis_roll_forearm
 kurtosis_picth_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1527,7 +1646,7 @@ kurtosis_picth_forearm
 kurtosis_yaw_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1535,7 +1654,7 @@ kurtosis_yaw_forearm
 skewness_roll_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1543,7 +1662,7 @@ skewness_roll_forearm
 skewness_pitch_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1551,7 +1670,7 @@ skewness_pitch_forearm
 skewness_yaw_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1559,7 +1678,7 @@ skewness_yaw_forearm
 max_roll_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1567,7 +1686,7 @@ max_roll_forearm
 max_picth_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1575,7 +1694,7 @@ max_picth_forearm
 max_yaw_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1583,7 +1702,7 @@ max_yaw_forearm
 min_roll_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1591,7 +1710,7 @@ min_roll_forearm
 min_pitch_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1599,7 +1718,7 @@ min_pitch_forearm
 min_yaw_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1607,7 +1726,7 @@ min_yaw_forearm
 amplitude_roll_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1615,7 +1734,7 @@ amplitude_roll_forearm
 amplitude_pitch_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1623,7 +1742,7 @@ amplitude_pitch_forearm
 amplitude_yaw_forearm
 </td>
 <td style="text-align:right;">
-20
+0
 </td>
 </tr>
 <tr>
@@ -1639,7 +1758,7 @@ total_accel_forearm
 var_accel_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1647,7 +1766,7 @@ var_accel_forearm
 avg_roll_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1655,7 +1774,7 @@ avg_roll_forearm
 stddev_roll_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1663,7 +1782,7 @@ stddev_roll_forearm
 var_roll_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1671,7 +1790,7 @@ var_roll_forearm
 avg_pitch_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1679,7 +1798,7 @@ avg_pitch_forearm
 stddev_pitch_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1687,7 +1806,7 @@ stddev_pitch_forearm
 var_pitch_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1695,7 +1814,7 @@ var_pitch_forearm
 avg_yaw_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1703,7 +1822,7 @@ avg_yaw_forearm
 stddev_yaw_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1711,7 +1830,7 @@ stddev_yaw_forearm
 var_yaw_forearm
 </td>
 <td style="text-align:right;">
-20
+19216
 </td>
 </tr>
 <tr>
@@ -1788,7 +1907,7 @@ magnet_forearm_z
 </tr>
 <tr>
 <td style="text-align:left;">
-problem_id
+classe
 </td>
 <td style="text-align:right;">
 0
@@ -1797,19 +1916,25 @@ problem_id
 </tbody>
 </table>
 </div>
-<p>We can see that all the columns having NAs have exactly 20 of them, being 20 the number of rows of the dataset, we can definitely remove those columns from both train and test datasets:</p>
-<pre class="r"><code>indexesToRemove &lt;- which(colSums(is.na(trainDf))==20) 
+<p>We can see that all the columns having NAs have a considerable amount of NAs (19216) covering more than 97% of the rows, we then can definitely remove those columns from both train and test datasets:</p>
+<pre class="r"><code>indexesToRemove &lt;- which(colSums(is.na(trainDf))==19216) 
 trainDf &lt;- trainDf[,-indexesToRemove]
 testDf &lt;- testDf[,-indexesToRemove]</code></pre>
 <p>The number of columns is now:</p>
 <pre class="r"><code>ncol(trainDf)</code></pre>
-<pre><code>## [1] 60</code></pre>
-<p>We reduced the number of columns to 60.</p>
-<p>##Machine Learning - based predictions.</p>
-<p>In this paragraph we will apply three techniques:</p>
-<p>###Decision Tree</p>
-<p>###Part 2</p>
-<p>###Part 3</p>
+<pre><code>## [1] 93</code></pre>
+<p>We reduced the number of columns to 93 (from 160).</p>
+</div>
+</div>
+<div id="further-reduction-of-variables" class="section level3">
+<h3>Further reduction of variables</h3>
+<p>##Machine Learning - based predictions. In this paragraph we will apply three techniques:Classification Trees, Random Forests and Generalized Boosted Model.</p>
+<p>###Classification Trees</p>
+<pre class="r"><code>set.seed(78282)
+#classificationTree &lt;- rpart(classe ~ ., data=trainDf, method=&quot;class&quot;)
+#fancyRpartPlot(classificationTree)</code></pre>
+<p>###Random Forests</p>
+<p>###Generalized Boosted Model</p>
 </div>
 </div>
 <div id="references" class="section level2">
@@ -1826,7 +1951,7 @@ testDf &lt;- testDf[,-indexesToRemove]</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1834,6 +1959,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -35,16 +35,30 @@ testDf <- read.csv(url("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-
 
 A quick glance to the train/test dataset gives:
 
-```{r dim1}
+```{r dimTrain}
 dim(trainDf)
 ```
-```{r dim1}
+```{r dimTest}
 dim(testDf)
 ```
 
 We can see that the train dataset has 19622 rows and 160 features, same number of features (as expected for the test dataset) and 20 rows; in the next paragraph we will have a look to the data quality:
 
-### Data Cleansing
+### Data Preparation
+Firt of all, we will prepare the data for further analysis, we will first remove the ones that wouldn't contribute to the accuracy of the prediction (by common sense), than we will remove the columns with NAs, then the ones having a very low variance, and finally the ones showing a high correlation among each other.
+
+#### Removing Variables that would not contribute to prediction's accuracy
+Let's have a quick look to the train dataset:
+
+
+
+
+
+
+
+
+#### Removing NAs
+
 We can generate an outline of the NAs in a simple way:
 
 ```{r nas2}
@@ -64,11 +78,23 @@ testDf <- testDf[,-indexesToRemove]
 
 The number of columns is now:
 
-```{r recalculate}
+```{r showVars}
 ncol(trainDf)
 ```
 
 We reduced the number of columns to 93 (from 160).
+
+#### Removing Variables with low variance
+
+#### Removing Variables that would not contribute to prediction's accuracy
+
+
+### Further reduction of variables
+
+A quick peek to the train
+
+
+
 
 ##Machine Learning - based predictions.
 In this paragraph we will apply three techniques:Classification Trees, Random Forests and Generalized Boosted Model.
@@ -77,8 +103,8 @@ In this paragraph we will apply three techniques:Classification Trees, Random Fo
 
 ```{r recalculate}
 set.seed(78282)
-classificationTree <- rpart(classe ~ ., data=trainDf, method="class")
-fancyRpartPlot(classificationTree)
+#classificationTree <- rpart(classe ~ ., data=trainDf, method="class")
+#fancyRpartPlot(classificationTree)
 ```
 
 
