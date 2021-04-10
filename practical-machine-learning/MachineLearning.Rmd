@@ -98,19 +98,28 @@ The number of columns is now:
 ncol(trainDf)
 ```
 
-We reduced the number of columns to 93.
+We reduced the number of columns to 88.
 
 #### Removing Variables with low variance
-Time to have a look at the variance, for the sake of simplicity, we will just remove the variables having low variance; it must be noted tho that just removing variables with little or not variance is *not* necessarily a best practice.
+Time to have a look at the variance, for the sake of simplicity, we will just remove the variables having low variance; it must be noted tho that just removing variables with little or not variance is *not* necessarily a best practice (see [2] for details) but for the sake of this essay, we decide to just remove them.
 
 
-#### Removing Variables that would not contribute to prediction's accuracy
+```{r removeLowVariance}
+nzv <- nearZeroVar(trainDf)
+trainDf <- trainDf[, -nzv]
+testDf <- testDf[, -nzv]
+```
 
+Looking at the number of columns now gives:
 
-### Further reduction of variables
+```{r columnsAfterLowVarRemoval}
+ncol(trainDf)
 
-A quick peek to the train
+```
 
+We now have 54 variables (from the original 160).
+
+#### Correlation among variables
 
 
 
@@ -135,5 +144,6 @@ set.seed(78282)
 
 ## References
 [1] http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har
+[2] https://www.r-bloggers.com/2014/03/near-zero-variance-predictors-should-we-remove-them/
 
 

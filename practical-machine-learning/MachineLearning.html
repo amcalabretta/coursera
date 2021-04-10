@@ -1982,18 +1982,21 @@ testDf &lt;- testDf[,-indexesToRemove]</code></pre>
 <p>The number of columns is now:</p>
 <pre class="r"><code>ncol(trainDf)</code></pre>
 <pre><code>## [1] 88</code></pre>
-<p>We reduced the number of columns to 93 (from 160).</p>
+<p>We reduced the number of columns to 88.</p>
 </div>
 <div id="removing-variables-with-low-variance" class="section level4">
 <h4>Removing Variables with low variance</h4>
+<p>Time to have a look at the variance, for the sake of simplicity, we will just remove the variables having low variance; it must be noted tho that just removing variables with little or not variance is <em>not</em> necessarily a best practice (see [2] for details) but for the sake of this essay, we decide to just remove them.</p>
+<pre class="r"><code>nzv &lt;- nearZeroVar(trainDf)
+trainDf &lt;- trainDf[, -nzv]
+testDf &lt;- testDf[, -nzv]</code></pre>
+<p>Looking at the number of columns now gives:</p>
+<pre class="r"><code>ncol(trainDf)</code></pre>
+<pre><code>## [1] 54</code></pre>
+<p>We now have 54 variables (from the original 160).</p>
 </div>
-<div id="removing-variables-that-would-not-contribute-to-predictions-accuracy-1" class="section level4">
-<h4>Removing Variables that would not contribute to prediction’s accuracy</h4>
-</div>
-</div>
-<div id="further-reduction-of-variables" class="section level3">
-<h3>Further reduction of variables</h3>
-<p>A quick peek to the train</p>
+<div id="correlation-among-variables" class="section level4">
+<h4>Correlation among variables</h4>
 <p>##Machine Learning - based predictions. In this paragraph we will apply three techniques:Classification Trees, Random Forests and Generalized Boosted Model.</p>
 <p>###Classification Trees</p>
 <pre class="r"><code>set.seed(78282)
@@ -2003,9 +2006,10 @@ testDf &lt;- testDf[,-indexesToRemove]</code></pre>
 <p>###Generalized Boosted Model</p>
 </div>
 </div>
+</div>
 <div id="references" class="section level2">
 <h2>References</h2>
-<p>[1] <a href="http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har" class="uri">http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har</a></p>
+<p>[1] <a href="http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har" class="uri">http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har</a> [2] <a href="https://www.r-bloggers.com/2014/03/near-zero-variance-predictors-should-we-remove-them/" class="uri">https://www.r-bloggers.com/2014/03/near-zero-variance-predictors-should-we-remove-them/</a></p>
 </div>
 
 
